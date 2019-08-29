@@ -2,3 +2,4 @@ rootProject.name = "chameleon"
 
 include "core"
 include "redis"
+include "demo"
