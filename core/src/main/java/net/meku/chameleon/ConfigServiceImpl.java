@@ -12,10 +12,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ConfigServiceImpl implements ConfigService, BeanPostProcessor, Ordered {
@@ -36,7 +33,9 @@ public class ConfigServiceImpl implements ConfigService, BeanPostProcessor, Orde
 
     @Override
     public List<Configable> listAll() {
-        return cacheResolver.list();
+        List<Configable> list = cacheResolver.list();
+        Collections.sort(list, ((o1, o2) -> o1.getKey().compareTo(o2.getKey())));
+        return list;
     }
 
     @Override
@@ -95,7 +94,9 @@ public class ConfigServiceImpl implements ConfigService, BeanPostProcessor, Orde
 
     @Override
     public Configable save(Configable configable) {
-        return persistResolver.save(configable);
+        Configable saved = persistResolver.save(configable);
+        cacheResolver.set(saved);
+        return saved;
     }
 
     @Override
