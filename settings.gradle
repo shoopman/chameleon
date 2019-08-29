@@ -1,0 +1,5 @@
+rootProject.name = "chameleon"
+
+include "core"
+include "memory"
+include "redis"
