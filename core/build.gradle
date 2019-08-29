@@ -1,6 +1,7 @@
 dependencies {
     compile "org.springframework:spring-aop:$version_spring"
     compile "org.springframework:spring-context:$version_spring"
+    compile "org.apache.commons:commons-lang3:$version_commons_lang3"
 
     testCompile "junit:junit:$version_junit"
 }

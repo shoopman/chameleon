@@ -2,6 +2,8 @@ package net.meku.chameleon.spi;
 
 import net.meku.chameleon.core.Configable;
 
+import java.util.List;
+
 /**
  * 配置项的缓存处理器
  */
@@ -30,4 +32,10 @@ public interface ConfigCacheResolver {
      * @return
      */
     boolean exists(String key);
+
+    /**
+     * 获得缓存中的所有配置
+     * @return
+     */
+    List<Configable> list();
 }

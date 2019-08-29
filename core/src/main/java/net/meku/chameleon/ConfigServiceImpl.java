@@ -1,15 +1,26 @@
 package net.meku.chameleon;
 
+import net.meku.chameleon.core.CacheableBeanResolver;
+import net.meku.chameleon.core.ConfigPojo;
 import net.meku.chameleon.core.Configable;
 import net.meku.chameleon.spi.ConfigCacheResolver;
 import net.meku.chameleon.spi.ConfigPersistResolver;
+import net.meku.chameleon.util.SpringUtils;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
-public class ConfigServiceImpl implements ConfigService {
+public class ConfigServiceImpl implements ConfigService, BeanPostProcessor, Ordered {
+
+    private Map<String, String> propertiesConfigs = new HashMap<>();
 
     @Autowired
     private ConfigCacheResolver cacheResolver;
@@ -17,9 +28,15 @@ public class ConfigServiceImpl implements ConfigService {
     @Autowired
     private ConfigPersistResolver persistResolver;
 
+    @Autowired
+    private CacheableBeanResolver cacheableBeanResolver;
+
+    @Autowired
+    private SpringUtils springUtils;
+
     @Override
     public List<Configable> listAll() {
-        return null;
+        return cacheResolver.list();
     }
 
     @Override
@@ -54,15 +71,56 @@ public class ConfigServiceImpl implements ConfigService {
 
     @Override
     public List<Configable> reload() {
-        List<Configable> list = persistResolver.load();
+        List<Configable> list = initializePropertiesList(); //properties文件中的配置
+        list.addAll(persistResolver.load());    //持久化的配置
+
+        // 先清空原缓存
         cacheResolver.clear();
-        // TODO 获得properties中的
+
+        // 重新设置缓存
         list.forEach(config -> cacheResolver.set(config));
+        return list;
+    }
+
+    private List<Configable> initializePropertiesList() {
+        List<Configable> list = new ArrayList<>();
+        for (String key : propertiesConfigs.keySet()) {
+            ConfigPojo pojo = new ConfigPojo();
+            pojo.setKey(key);
+            pojo.setValue(propertiesConfigs.get(key));
+            list.add(pojo);
+        }
         return list;
     }
 
     @Override
     public Configable save(Configable configable) {
         return persistResolver.save(configable);
+    }
+
+    @Override
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        return bean;
+    }
+
+    // 设置应用级配置项的默认值
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        List<String> keys = cacheableBeanResolver.resolve(bean);
+        if (!keys.isEmpty()) {
+            keys.forEach(key -> setConfigFromProperties(key));
+        }
+
+        return bean;
+    }
+
+    private void setConfigFromProperties(String key) {
+        String value = springUtils.getProperty(key);
+        propertiesConfigs.put(key, value);
+    }
+
+    @Override
+    public int getOrder() {
+        return Ordered.LOWEST_PRECEDENCE;
     }
 }
