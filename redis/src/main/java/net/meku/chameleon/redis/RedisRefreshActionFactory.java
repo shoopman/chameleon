@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.listener.KeyspaceEventMessageListener;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
-import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,8 +16,7 @@ import java.util.Set;
 /**
  * @author LiangBin
  */
-@Component
-public class ConfigRefreshListener extends KeyspaceEventMessageListener implements ConfigRefreshActionFactory {
+public class RedisRefreshActionFactory extends KeyspaceEventMessageListener implements ConfigRefreshActionFactory {
 
     private static final String KEY_EVENT = "__keyevent@";
 
@@ -35,7 +33,7 @@ public class ConfigRefreshListener extends KeyspaceEventMessageListener implemen
      * @param listenerContainer must not be {@literal null}.
      */
     @Autowired
-    public ConfigRefreshListener(RedisMessageListenerContainer listenerContainer) {
+    public RedisRefreshActionFactory(RedisMessageListenerContainer listenerContainer) {
         super(listenerContainer);
     }
 

@@ -1,6 +1,9 @@
 dependencies {
-    compile project(":core")
+    compile project(":redis")
+    compile project(":persist-json")
+    compile "org.springframework.boot:spring-boot-autoconfigure:$version_spring_boot"
+
     compileOnly "org.springframework.boot:spring-boot-starter-data-redis:$version_spring_boot"
-    
+
     testCompile "junit:junit:$version_junit"
 }
