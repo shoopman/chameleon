@@ -1,4 +1,4 @@
-package net.meku.chameleon.refresh;
+package net.meku.chameleon.spi;
 
 /**
  * 管理配置变更操作的工厂

@@ -2,7 +2,7 @@ package net.meku.chameleon.memory;
 
 import net.meku.chameleon.core.ConfigPojo;
 import net.meku.chameleon.core.Configable;
-import net.meku.chameleon.refresh.ConfigRefreshActionFactory;
+import net.meku.chameleon.spi.ConfigRefreshActionFactory;
 import net.meku.chameleon.spi.ConfigCacheResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 

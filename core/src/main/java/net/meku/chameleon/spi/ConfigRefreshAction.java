@@ -1,4 +1,4 @@
-package net.meku.chameleon.refresh;
+package net.meku.chameleon.spi;
 
 /**
  * 当配置项（缓存）发生重新加载（变化）时，需要执行的动作

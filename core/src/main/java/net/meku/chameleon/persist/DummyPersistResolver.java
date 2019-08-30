@@ -1,4 +1,4 @@
-package net.meku.chameleon.memory;
+package net.meku.chameleon.persist;
 
 import net.meku.chameleon.core.Configable;
 import net.meku.chameleon.spi.ConfigPersistResolver;

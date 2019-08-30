@@ -1,10 +1,11 @@
-package net.meku.chameleon;
+package net.meku.chameleon.core;
 
 import net.meku.chameleon.core.CacheableBeanResolver;
 import net.meku.chameleon.core.ConfigPojo;
 import net.meku.chameleon.core.Configable;
 import net.meku.chameleon.spi.ConfigCacheResolver;
 import net.meku.chameleon.spi.ConfigPersistResolver;
+import net.meku.chameleon.spi.ConfigService;
 import net.meku.chameleon.util.SpringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;

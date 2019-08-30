@@ -1,5 +1,6 @@
-package net.meku.chameleon;
+package net.meku.chameleon.core;
 
+import net.meku.chameleon.spi.ConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;

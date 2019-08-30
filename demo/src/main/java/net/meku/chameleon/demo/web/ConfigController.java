@@ -2,7 +2,7 @@ package net.meku.chameleon.demo.web;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import net.meku.chameleon.ConfigService;
+import net.meku.chameleon.spi.ConfigService;
 import net.meku.chameleon.core.Configable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

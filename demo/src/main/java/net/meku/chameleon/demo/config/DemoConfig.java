@@ -1,9 +1,9 @@
 package net.meku.chameleon.demo.config;
 
-import net.meku.chameleon.memory.DummyPersistResolver;
+import net.meku.chameleon.persist.DummyPersistResolver;
 import net.meku.chameleon.memory.MemoryCacheResolver;
 import net.meku.chameleon.memory.MemoryRefreshActionFactory;
-import net.meku.chameleon.refresh.ConfigRefreshActionFactory;
+import net.meku.chameleon.spi.ConfigRefreshActionFactory;
 import net.meku.chameleon.spi.ConfigCacheResolver;
 import net.meku.chameleon.spi.ConfigPersistResolver;
 import org.springframework.context.annotation.Bean;

@@ -1,8 +1,8 @@
 package net.meku.chameleon.demo.demo;
 
-import net.meku.chameleon.ConfigService;
-import net.meku.chameleon.refresh.ConfigRefreshAction;
-import net.meku.chameleon.refresh.ConfigRefreshActionFactory;
+import net.meku.chameleon.spi.ConfigService;
+import net.meku.chameleon.spi.ConfigRefreshAction;
+import net.meku.chameleon.spi.ConfigRefreshActionFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;

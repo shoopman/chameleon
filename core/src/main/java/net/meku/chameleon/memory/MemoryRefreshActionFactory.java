@@ -1,7 +1,7 @@
 package net.meku.chameleon.memory;
 
-import net.meku.chameleon.refresh.ConfigRefreshAction;
-import net.meku.chameleon.refresh.ConfigRefreshActionFactory;
+import net.meku.chameleon.spi.ConfigRefreshAction;
+import net.meku.chameleon.spi.ConfigRefreshActionFactory;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;

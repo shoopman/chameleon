@@ -1,4 +1,4 @@
-package net.meku.chameleon;
+package net.meku.chameleon.spi;
 
 import net.meku.chameleon.core.Configable;
 
