@@ -1,0 +1,6 @@
+dependencies {
+    compile project(":core")
+    compile "org.springframework.boot:spring-boot-starter-json:$version_spring_boot"
+
+    testCompile "junit:junit:$version_junit"
+}

@@ -1,11 +1,11 @@
 package net.meku.chameleon.demo.config;
 
-import net.meku.chameleon.persist.DummyPersistResolver;
 import net.meku.chameleon.memory.MemoryCacheResolver;
 import net.meku.chameleon.memory.MemoryRefreshActionFactory;
-import net.meku.chameleon.spi.ConfigRefreshActionFactory;
+import net.meku.chameleon.persist.FilePersistResolver;
 import net.meku.chameleon.spi.ConfigCacheResolver;
 import net.meku.chameleon.spi.ConfigPersistResolver;
+import net.meku.chameleon.spi.ConfigRefreshActionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,7 +19,8 @@ public class DemoConfig {
 
     @Bean
     public ConfigPersistResolver configPersistResolver() {
-        return new DummyPersistResolver();
+        //return new DummyPersistResolver();
+        return new FilePersistResolver();
     }
 
     @Bean

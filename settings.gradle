@@ -2,4 +2,6 @@ rootProject.name = "chameleon"
 
 include "core"
 include "redis"
+include "starter"
+include "persist-json"
 include "demo"

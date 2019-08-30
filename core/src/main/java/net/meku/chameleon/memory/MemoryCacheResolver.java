@@ -1,12 +1,11 @@
 package net.meku.chameleon.memory;
 
-import net.meku.chameleon.core.ConfigPojo;
 import net.meku.chameleon.core.Configable;
-import net.meku.chameleon.spi.ConfigRefreshActionFactory;
 import net.meku.chameleon.spi.ConfigCacheResolver;
+import net.meku.chameleon.spi.ConfigRefreshActionFactory;
+import net.meku.chameleon.util.ChameleonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,14 +47,6 @@ public class MemoryCacheResolver implements ConfigCacheResolver {
 
     @Override
     public List<Configable> list() {
-        List<Configable> list = new ArrayList<>();
-        for (Map.Entry<String, String> entry : cache.entrySet()) {
-            ConfigPojo pojo = new ConfigPojo();
-            pojo.setKey(entry.getKey());
-            pojo.setValue(entry.getValue());
-            list.add(pojo);
-        }
-
-        return list;
+        return ChameleonUtils.fromMap(cache);
     }
 }
