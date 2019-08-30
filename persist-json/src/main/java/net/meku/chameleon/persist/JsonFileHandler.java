@@ -42,7 +42,6 @@ public class JsonFileHandler {
         Map<String, String> map;
         File file = new File(filePath);
         if (!file.exists()) {
-            // TODO create the file
             map = new HashMap<>();
         } else {
             map = objectMapper.readValue(file, Map.class);
