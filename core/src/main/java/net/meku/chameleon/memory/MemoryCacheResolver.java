@@ -31,8 +31,8 @@ public class MemoryCacheResolver implements ConfigCacheResolver {
 
         cache.put(configable.getKey(), configable.getValue());
 
-        if (refreshActionFactory != null) {
-            refreshActionFactory.onRefresh(configable.getKey());
+        if (refreshActionFactory != null && refreshActionFactory instanceof MemoryRefreshActionFactory) {
+            ((MemoryRefreshActionFactory) refreshActionFactory).onRefresh(configable.getKey());
         }
     }
 

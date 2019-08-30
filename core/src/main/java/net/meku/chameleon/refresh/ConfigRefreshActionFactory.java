@@ -22,9 +22,4 @@ public interface ConfigRefreshActionFactory {
      */
     void removeActions(String key);
 
-    /**
-     * 响应配置项变化
-     * @param key
-     */
-    void onRefresh(String key);
 }

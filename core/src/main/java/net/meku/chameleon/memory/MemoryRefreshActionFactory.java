@@ -32,8 +32,8 @@ public class MemoryRefreshActionFactory implements ConfigRefreshActionFactory {
         actionMap.remove(key);
     }
 
-    @Override
-    public void onRefresh(String key) {
+
+    void onRefresh(String key) {
         Set<ConfigRefreshAction> actions = actionMap.get(key);
         if (actions == null || actions.isEmpty()) {
             return;
