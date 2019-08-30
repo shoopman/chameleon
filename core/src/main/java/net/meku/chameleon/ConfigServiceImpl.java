@@ -70,8 +70,9 @@ public class ConfigServiceImpl implements ConfigService, BeanPostProcessor, Orde
 
     @Override
     public List<Configable> reload() {
-        List<Configable> list = initializePropertiesList(); //properties文件中的配置
-        list.addAll(persistResolver.load());    //持久化的配置
+        List<Configable> properties = initializePropertiesList(); //properties文件中的配置
+        List<Configable> persists = persistResolver.load(); //持久化的配置
+        List<Configable> list = mergeConfigList(properties, persists);
 
         // 先清空原缓存
         cacheResolver.clear();
@@ -90,6 +91,24 @@ public class ConfigServiceImpl implements ConfigService, BeanPostProcessor, Orde
             list.add(pojo);
         }
         return list;
+    }
+
+    private List<Configable> mergeConfigList(List<Configable> properties, List<Configable> persists) {
+        for (Configable configable : properties) {
+            if (!existsInList(configable.getKey(), persists)) {
+                persists.add(configable);   //如果未持久化的properties中的配置，才加入到缓存
+            }
+        }
+        return persists;
+    }
+
+    private boolean existsInList(String key, List<Configable> list) {
+        for (Configable configable : list) {
+            if (key.equals(configable.getKey())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
