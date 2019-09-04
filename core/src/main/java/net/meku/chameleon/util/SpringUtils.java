@@ -40,8 +40,8 @@ public class SpringUtils implements ApplicationContextAware, EmbeddedValueResolv
     /**
      * 动态获取配置文件中的值
      *
-     * @param name
-     * @return
+     * @param name 配置名称
+     * @return 配置值
      */
     public String getProperty(String name) {
         String key = "${" + name + "}";

@@ -10,15 +10,15 @@ public interface ConfigRefreshActionFactory {
     /**
      * 增加变更操作
      *
-     * @param key
-     * @param action
+     * @param key    配置标识
+     * @param action 操作
      */
     void registerAction(String key, ConfigRefreshAction action);
 
     /**
      * 移除变更操作
      *
-     * @param key
+     * @param key 配置标识
      */
     void removeActions(String key);
 

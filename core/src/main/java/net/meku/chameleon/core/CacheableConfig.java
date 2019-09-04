@@ -16,7 +16,7 @@ public @interface CacheableConfig {
 
     /**
      * 是否忽略此方法
-     * @return
+     * @return true则忽略
      */
     boolean ignore() default false;
 }

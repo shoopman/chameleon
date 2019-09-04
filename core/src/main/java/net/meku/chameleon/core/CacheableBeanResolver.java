@@ -20,8 +20,8 @@ public class CacheableBeanResolver {
     /**
      * 解析Cacheable bean
      *
-     * @param bean
-     * @return 需要缓存的参数名
+     * @param bean 需要处理的bean
+     * @return 需要缓存的参数名列表
      */
     public List<String> resolve(Object bean) {
         List<String> cacheableKeys = new ArrayList<>();

@@ -10,7 +10,7 @@ It can support for distributed systems by redis module.
 Gradle build.gradle
 
 ```gradle
-    compile("net.meku.chameleon:chameleon-core:1.0-SNAPSHOT")
+    compile("net.meku.chameleon:chameleon-starter:1.0.0")
 ```
 
 Maven pom.xml 
@@ -19,8 +19,8 @@ Maven pom.xml
 
 	<dependency>
 		<groupId>net.meku.chameleon</groupId>
-		<artifactId>chameleon-core</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<artifactId>chameleon-starter</artifactId>
+		<version>1.0.0</version>
 	</dependency>
         
 ```
@@ -35,9 +35,10 @@ Maven pom.xml
 
     // Add or update a configuration
     configService.save(configable);
-    
+
     // Get the value of a configuration
     String s1 = configService.getString(key1);
     int i1 = configService.getInt(key2);
 
 ```
+

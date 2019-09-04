@@ -15,3 +15,103 @@ allprojects {
     }
 }
 
+
+subprojects {
+    apply plugin: 'maven'
+    // 获取本地仓库路径
+    def localRepositoryPath = 'file://' + new File(System.getProperty('user.home'), '.m2/repository').absolutePath
+    //打包至本地仓库配置
+    uploadArchives {
+        repositories {
+            //mavenDeployer 需要依赖 apply plugin: 'maven'
+            mavenDeployer   {
+                repository(url: localRepositoryPath)
+                pom.project {
+                    name = 'chameleon'       // 当前项目名称
+                    version = '1.0.0'   //当前项目版本  0.0.1
+                    groupId = 'net.meku.chameleon'     //  当前项目组  com.xxx
+                }
+            }
+        }
+    }
+
+    // publish to OSS/maven central
+    apply plugin: 'maven-publish'
+    apply plugin: 'signing'
+
+    task sourcesJar(type: Jar) {
+        archiveClassifier = 'sources'
+        from sourceSets.main.allJava
+    }
+    // 生成 javadoc jar
+    task javadocJar(type: Jar) {
+        archiveClassifier = 'javadoc'
+        from javadoc
+    }
+
+    publishing {
+        // 定义发布什么
+        publications {
+            mavenJava(MavenPublication) {
+                groupId = 'net.meku.chameleon'
+                version = '1.0.0'
+                // groupId,artifactId,version，如果不定义，则会按照以上默认值执行
+                from components.java
+                artifact sourcesJar
+                artifact javadocJar
+                pom {
+                    // 构件名称
+                    // 区别于artifactId，可以理解为artifactName
+                    name = 'Chameleon'
+                    // 构件描述
+                    description = 'A light-weight library to manage the configurations'
+                    // 构件主页
+                    url = 'https://github.com/shoopman/chameleon'
+                    // 许可证名称和地址
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    // 开发者信息
+                    developers {
+                        developer {
+                            name = 'Cary Leung'
+                            email = 'shoopman917@gmail.com'
+                        }
+                    }
+                    // 版本控制仓库地址
+                    scm {
+                        url = 'https://github.com/shoopman/chameleon'
+                        connection = 'scm:git:git://github.com/shoopman/chameleon.git'
+                        developerConnection = 'scm:git:ssh://git@github.com:shoopman/chameleon.git'
+                    }
+                }
+            }
+        }
+        // 定义发布到哪里
+        repositories {
+            maven {
+                url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+                credentials {
+                    // 这里就是之前在issues.sonatype.org注册的账号
+                    username sonatypeUsername
+                    password sonatypePassword
+                }
+            }
+        }
+    }
+
+    signing {
+        sign publishing.publications.mavenJava
+    }
+
+
+    javadoc {
+        // <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        // 防止本地打开中文乱码
+        options.addStringOption("charset", "UTF-8")
+    }
+
+}

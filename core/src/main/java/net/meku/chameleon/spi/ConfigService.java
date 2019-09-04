@@ -9,7 +9,7 @@ public interface ConfigService {
     /**
      * 从当前缓存中获得全部的配置项
      *
-     * @return
+     * @return 配置项列表
      */
     List<Configable> listAll();
 
@@ -28,15 +28,15 @@ public interface ConfigService {
     /**
      * 清空缓存并重新加载
      *
-     * @return
+     * @return 配置项列表
      */
     List<Configable> reload();
 
     /**
      * 更新/保存配置项
      *
-     * @param configable
-     * @return
+     * @param configable 要保存/更新的配置项
+     * @return 配置项
      */
     Configable save(Configable configable);
 }
