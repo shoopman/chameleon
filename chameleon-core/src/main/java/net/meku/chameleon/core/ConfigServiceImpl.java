@@ -1,12 +1,10 @@
 package net.meku.chameleon.core;
 
-import net.meku.chameleon.core.CacheableBeanResolver;
-import net.meku.chameleon.core.ConfigPojo;
-import net.meku.chameleon.core.Configable;
 import net.meku.chameleon.spi.ConfigCacheResolver;
 import net.meku.chameleon.spi.ConfigPersistResolver;
 import net.meku.chameleon.spi.ConfigService;
 import net.meku.chameleon.util.SpringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -51,22 +49,38 @@ public class ConfigServiceImpl implements ConfigService, BeanPostProcessor, Orde
 
     @Override
     public boolean getBool(String key) {
-        return Boolean.parseBoolean(getString(key));
+        String value = getString(key);
+        if (StringUtils.isBlank(value)) {
+            return false;
+        }
+        return Boolean.parseBoolean(value);
     }
 
     @Override
     public int getInt(String key) {
-        return Integer.parseInt(getString(key));
+        String value = getString(key);
+        if (StringUtils.isBlank(value)) {
+            return 0;
+        }
+        return Integer.parseInt(value);
     }
 
     @Override
     public long getLong(String key) {
-        return Long.parseLong(getString(key));
+        String value = getString(key);
+        if (StringUtils.isBlank(value)) {
+            return 0l;
+        }
+        return Long.parseLong(value);
     }
 
     @Override
     public double getDouble(String key) {
-        return Double.parseDouble(getString(key));
+        String value = getString(key);
+        if (StringUtils.isBlank(value)) {
+            return 0d;
+        }
+        return Double.parseDouble(value);
     }
 
     @Override
