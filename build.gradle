@@ -15,26 +15,7 @@ allprojects {
     }
 }
 
-
 subprojects {
-    apply plugin: 'maven'
-    // 获取本地仓库路径
-    def localRepositoryPath = 'file://' + new File(System.getProperty('user.home'), '.m2/repository').absolutePath
-    //打包至本地仓库配置
-    uploadArchives {
-        repositories {
-            //mavenDeployer 需要依赖 apply plugin: 'maven'
-            mavenDeployer   {
-                repository(url: localRepositoryPath)
-                pom.project {
-                    name = 'chameleon'       // 当前项目名称
-                    version = '1.0.0'   //当前项目版本  0.0.1
-                    groupId = 'net.meku.chameleon'     //  当前项目组  com.xxx
-                }
-            }
-        }
-    }
-
     // publish to OSS/maven central
     apply plugin: 'maven-publish'
     apply plugin: 'signing'

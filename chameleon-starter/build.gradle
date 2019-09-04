@@ -1,6 +1,6 @@
 dependencies {
-    compile project(":redis")
-    compile project(":persist-json")
+    compile project(":chameleon-redis")
+    compile project(":chameleon-persist-json")
     compile "org.springframework.boot:spring-boot-autoconfigure:$version_spring_boot"
 
     compileOnly "org.springframework.boot:spring-boot-starter-data-redis:$version_spring_boot"

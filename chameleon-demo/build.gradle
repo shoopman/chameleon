@@ -1,5 +1,5 @@
 dependencies {
-    compile project(":starter")
+    compile project(":chameleon-starter")
     compile "org.springframework.boot:spring-boot-starter-web:$version_spring_boot"
     compile "io.springfox:springfox-swagger2:$version_springfox_swagger2"
     compile "io.springfox:springfox-swagger-ui:$version_springfox_swagger2"
