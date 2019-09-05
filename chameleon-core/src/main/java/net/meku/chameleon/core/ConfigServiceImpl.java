@@ -9,11 +9,9 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.core.Ordered;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-@Service
 public class ConfigServiceImpl implements ConfigService, BeanPostProcessor, Ordered {
 
     private Map<String, String> propertiesConfigs = new HashMap<>();

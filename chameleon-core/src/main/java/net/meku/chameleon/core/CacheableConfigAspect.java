@@ -11,8 +11,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -24,9 +22,7 @@ import java.util.Map;
 /**
  * @author LiangBin
  */
-@ConditionalOnExpression("'${spring.profiles.active}' == 'development' or '${spring.profiles.active}' == 'test'")
 @Aspect
-@Component
 public class CacheableConfigAspect {
 
     @Autowired
@@ -58,7 +54,8 @@ public class CacheableConfigAspect {
         if (configKey == null) {
             ignoreMethods.add(aopKey);
             return joinPoint.proceed();
-        } else {
+        }
+        else {
             keyMaps.put(aopKey, configKey);
             return getCacheConfig(configKey, signature.getReturnType());
         }

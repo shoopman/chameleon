@@ -5,7 +5,6 @@ import net.meku.chameleon.spi.ConfigPersistResolver;
 import net.meku.chameleon.util.ChameleonUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,8 +17,11 @@ public class FilePersistResolver implements ConfigPersistResolver {
 
     private static final Log LOGGER = LogFactory.getLog(JsonFileHandler.class);
 
-    @Autowired
     private JsonFileHandler jsonFileHandler;
+
+    public FilePersistResolver(JsonFileHandler jsonFileHandler) {
+        this.jsonFileHandler = jsonFileHandler;
+    }
 
     @Override
     public List<Configable> load() {

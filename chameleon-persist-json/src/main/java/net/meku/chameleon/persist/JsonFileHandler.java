@@ -3,9 +3,7 @@ package net.meku.chameleon.persist;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,13 +11,15 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
 public class JsonFileHandler {
 
     private static final Log LOGGER = LogFactory.getLog(JsonFileHandler.class);
 
-    @Autowired
     private ObjectMapper objectMapper;
+
+    public JsonFileHandler(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
 
     @Value("${chameleon.persist.json.path:configs.json}")
     private String filePath = "configs.json";
@@ -43,7 +43,8 @@ public class JsonFileHandler {
         File file = new File(filePath);
         if (!file.exists()) {
             map = new HashMap<>();
-        } else {
+        }
+        else {
             map = objectMapper.readValue(file, Map.class);
         }
 

@@ -4,7 +4,6 @@ import net.meku.chameleon.util.ReflectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -14,7 +13,6 @@ import java.util.List;
 /**
  * @author LiangBin
  */
-@Component
 public class CacheableBeanResolver {
 
     /**
@@ -39,7 +37,8 @@ public class CacheableBeanResolver {
                     }
                 }
             }
-        } else {
+        }
+        else {
             // 类上无注解的方法
             Method[] methods = targetClass.getMethods();
             for (Method method : methods) {
