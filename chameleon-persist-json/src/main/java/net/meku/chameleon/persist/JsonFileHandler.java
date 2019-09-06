@@ -22,7 +22,7 @@ public class JsonFileHandler {
     }
 
     @Value("${chameleon.persist.json.path:configs.json}")
-    private String filePath = "configs.json";
+    private String filePath;
 
     public Map<String, String> read() {
         File file = new File(filePath);

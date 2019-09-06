@@ -6,13 +6,14 @@ import net.meku.chameleon.spi.ConfigService;
 import net.meku.chameleon.util.SpringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.core.Ordered;
 
 import java.util.*;
 
-public class ConfigServiceImpl implements ConfigService, BeanPostProcessor, Ordered {
+public class ConfigServiceImpl implements ConfigService, InitializingBean, BeanPostProcessor, Ordered {
 
     private Map<String, String> propertiesConfigs = new HashMap<>();
 
@@ -147,6 +148,7 @@ public class ConfigServiceImpl implements ConfigService, BeanPostProcessor, Orde
         return bean;
     }
 
+
     private void setConfigFromProperties(String key) {
         String value = springUtils.getProperty(key);
         propertiesConfigs.put(key, value);
@@ -155,5 +157,10 @@ public class ConfigServiceImpl implements ConfigService, BeanPostProcessor, Orde
     @Override
     public int getOrder() {
         return Ordered.LOWEST_PRECEDENCE;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        reload();
     }
 }
