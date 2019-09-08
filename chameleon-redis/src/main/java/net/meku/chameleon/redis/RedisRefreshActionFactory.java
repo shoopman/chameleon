@@ -3,7 +3,6 @@ package net.meku.chameleon.redis;
 import net.meku.chameleon.spi.ConfigRefreshAction;
 import net.meku.chameleon.spi.ConfigRefreshActionFactory;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.listener.KeyspaceEventMessageListener;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
@@ -24,17 +23,18 @@ public class RedisRefreshActionFactory extends KeyspaceEventMessageListener impl
 
     private Map<String, Set<ConfigRefreshAction>> actionMap = new HashMap<>();
 
-    @Autowired
     private RedisCacheConfig redisCacheConfig;
 
     /**
      * Creates new {@link KeyspaceEventMessageListener}.
      *
      * @param listenerContainer must not be {@literal null}.
+     * @param redisCacheConfig  cache config, must not be null.
      */
-    @Autowired
-    public RedisRefreshActionFactory(RedisMessageListenerContainer listenerContainer) {
+    public RedisRefreshActionFactory(RedisMessageListenerContainer listenerContainer,
+                                     RedisCacheConfig redisCacheConfig) {
         super(listenerContainer);
+        this.redisCacheConfig = redisCacheConfig;
     }
 
     @Override

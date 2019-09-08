@@ -8,8 +8,8 @@ import net.meku.chameleon.memory.MemoryCacheResolver;
 import net.meku.chameleon.memory.MemoryRefreshActionFactory;
 import net.meku.chameleon.persist.FilePersistResolver;
 import net.meku.chameleon.persist.JsonFileHandler;
+import net.meku.chameleon.redis.RedisCacheConfig;
 import net.meku.chameleon.redis.RedisCacheResolver;
-import net.meku.chameleon.redis.RedisRefreshActionFactoryBuilder;
 import net.meku.chameleon.spi.ConfigCacheResolver;
 import net.meku.chameleon.spi.ConfigPersistResolver;
 import net.meku.chameleon.spi.ConfigRefreshActionFactory;
@@ -47,6 +47,11 @@ public class ChameleonAutoConfiguration {
     }
     //======== core module beans end ========
 
+    @ConditionalOnProperty(value = "chameleon.cache", havingValue = "redis")
+    @Bean
+    public RedisCacheConfig redisCacheConfig() {
+        return new RedisCacheConfig();
+    }
 
     @ConditionalOnProperty(value = "chameleon.cache", havingValue = "redis")
     @Bean
@@ -70,13 +75,6 @@ public class ChameleonAutoConfiguration {
     @Bean
     public ConfigPersistResolver filePersistResolver(JsonFileHandler jsonFileHandler) {
         return new FilePersistResolver(jsonFileHandler);
-    }
-
-    @ConditionalOnProperty(value = "chameleon.cache", havingValue = "redis")
-    @Bean
-    public ConfigRefreshActionFactory redisRefreshActionFactory() {
-        RedisRefreshActionFactoryBuilder builder = new RedisRefreshActionFactoryBuilder();
-        return builder.build();
     }
 
     @ConditionalOnMissingBean(ConfigRefreshActionFactory.class)

@@ -6,6 +6,14 @@ public class ConfigPojo implements Configable {
 
     private String value;
 
+    public ConfigPojo() {
+    }
+
+    public ConfigPojo(String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
+
     @Override
     public String getKey() {
         return key;
