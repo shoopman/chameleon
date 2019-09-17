@@ -4,7 +4,7 @@ import net.meku.chameleon.core.Configable;
 
 import java.util.List;
 
-public interface ConfigService {
+public interface ConfigManager {
 
     /**
      * 从当前缓存中获得全部的配置项

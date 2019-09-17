@@ -1,6 +1,6 @@
 package net.meku.chameleon.demo.demo;
 
-import net.meku.chameleon.spi.ConfigService;
+import net.meku.chameleon.spi.ConfigManager;
 import net.meku.chameleon.spi.ConfigRefreshAction;
 import net.meku.chameleon.spi.ConfigRefreshActionFactory;
 import org.apache.commons.logging.Log;
@@ -24,11 +24,11 @@ public class RefreshActionDemo implements ConfigRefreshAction, InitializingBean 
     private ConfigRefreshActionFactory refreshActionFactory;
 
     @Autowired
-    private ConfigService configService;
+    private ConfigManager configManager;
 
     @Override
     public void onRefresh() {
-        boolean value = configService.getBool(REFRESH_KEY);
+        boolean value = configManager.getBool(REFRESH_KEY);
         LOGGER.info("Now the value is " + value);
     }
 

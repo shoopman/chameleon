@@ -1,6 +1,6 @@
 package net.meku.chameleon.core;
 
-import net.meku.chameleon.spi.ConfigService;
+import net.meku.chameleon.spi.ConfigManager;
 import net.meku.chameleon.util.ReflectUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +26,7 @@ import java.util.Map;
 public class CacheableConfigAspect {
 
     @Autowired
-    private ConfigService configService;
+    private ConfigManager configManager;
 
     private List<String> ignoreMethods = new ArrayList<>();
 
@@ -104,7 +104,7 @@ public class CacheableConfigAspect {
     }
 
     private Object getCacheConfig(String key, Class type) {
-        String value = configService.getString(key);
+        String value = configManager.getString(key);
         if (type == String.class) {
             return value;
         }

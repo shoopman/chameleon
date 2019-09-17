@@ -2,7 +2,7 @@ package net.meku.chameleon.core;
 
 import net.meku.chameleon.spi.ConfigCacheResolver;
 import net.meku.chameleon.spi.ConfigPersistResolver;
-import net.meku.chameleon.spi.ConfigService;
+import net.meku.chameleon.spi.ConfigManager;
 import net.meku.chameleon.util.SpringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
@@ -13,7 +13,7 @@ import org.springframework.core.Ordered;
 
 import java.util.*;
 
-public class ConfigServiceImpl implements ConfigService, InitializingBean, BeanPostProcessor, Ordered {
+public class ConfigManagerImpl implements ConfigManager, InitializingBean, BeanPostProcessor, Ordered {
 
     private Map<String, String> propertiesConfigs = new HashMap<>();
 
