@@ -10,7 +10,7 @@ It can support for distributed systems by redis module.
 Gradle build.gradle
 
 ```gradle
-    compile("net.meku.chameleon:chameleon-starter:1.0.0")
+    compile("net.meku.chameleon:chameleon-starter:1.0.1")
 ```
 
 Maven pom.xml 
@@ -20,7 +20,7 @@ Maven pom.xml
 	<dependency>
 		<groupId>net.meku.chameleon</groupId>
 		<artifactId>chameleon-starter</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 	</dependency>
         
 ```
