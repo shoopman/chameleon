@@ -35,7 +35,7 @@ subprojects {
         publications {
             mavenJava(MavenPublication) {
                 groupId = 'net.meku.chameleon'
-                version = '1.0.1'
+                version = '1.0.2'
                 // groupId,artifactId,version，如果不定义，则会按照以上默认值执行
                 from components.java
                 artifact sourcesJar

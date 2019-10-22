@@ -22,6 +22,13 @@ public interface ConfigCacheResolver {
     void set(Configable configable);
 
     /**
+     * 设置多项配置到缓存
+     *
+     * @param list 配置项列表
+     */
+    void set(List<? extends Configable> list);
+
+    /**
      * 从缓存中获得配置值
      *
      * @param key 配置标识

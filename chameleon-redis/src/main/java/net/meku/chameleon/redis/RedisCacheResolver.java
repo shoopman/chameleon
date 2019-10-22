@@ -6,9 +6,7 @@ import net.meku.chameleon.spi.ConfigCacheResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class RedisCacheResolver implements ConfigCacheResolver {
 
@@ -26,7 +24,22 @@ public class RedisCacheResolver implements ConfigCacheResolver {
 
     @Override
     public void set(Configable configable) {
+        if (configable == null) {
+            return;
+        }
+
         redisTemplate.opsForValue().set(getFullKey(configable.getKey()), configable.getValue());
+    }
+
+    @Override
+    public void set(List<? extends Configable> list) {
+        if (list == null || list.isEmpty()) {
+            return;
+        }
+
+        Map<String, String> configs = new HashMap<>();
+        list.forEach(configable -> configs.put(getFullKey(configable.getKey()), configable.getValue()));
+        redisTemplate.opsForValue().multiSet(configs);
     }
 
     @Override

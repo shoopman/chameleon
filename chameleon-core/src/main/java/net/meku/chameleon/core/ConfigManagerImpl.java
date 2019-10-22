@@ -1,8 +1,8 @@
 package net.meku.chameleon.core;
 
 import net.meku.chameleon.spi.ConfigCacheResolver;
-import net.meku.chameleon.spi.ConfigPersistResolver;
 import net.meku.chameleon.spi.ConfigManager;
+import net.meku.chameleon.spi.ConfigPersistResolver;
 import net.meku.chameleon.util.SpringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
@@ -88,11 +88,14 @@ public class ConfigManagerImpl implements ConfigManager, InitializingBean, BeanP
         List<Configable> persists = persistResolver.load(); //持久化的配置
         List<Configable> list = mergeConfigList(properties, persists);
 
-        // 先清空原缓存
-        cacheResolver.clear();
+        if (!list.isEmpty()) {
+            // 先清空原缓存
+            cacheResolver.clear();
 
-        // 重新设置缓存
-        list.forEach(config -> cacheResolver.set(config));
+            // 重新设置缓存
+            cacheResolver.set(list);
+        }
+
         return list;
     }
 

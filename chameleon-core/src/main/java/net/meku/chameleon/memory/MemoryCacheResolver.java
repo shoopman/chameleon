@@ -36,6 +36,15 @@ public class MemoryCacheResolver implements ConfigCacheResolver {
     }
 
     @Override
+    public void set(List<? extends Configable> list) {
+        if (list == null || list.isEmpty()) {
+            return;
+        }
+
+        list.forEach(configable -> set(configable));
+    }
+
+    @Override
     public String get(String key) {
         return cache.get(key);
     }
